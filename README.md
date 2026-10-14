@@ -50,15 +50,17 @@ Read data --> clean --> log10(price) --> fit one line --> value score --> group 
 | Step | Script | Why |
 |---|---|--|
 | 1. Log of price | uses `log10(price)`instead of normal price | Prices are very skewed by very expensive bottles. Making this a log scale makes the relationship linear. |
-| 2. Expected rating | fit one line through all wines `expected points = a + b*log10(price)  | Give a rating of what a wine at a specific price should have. |
+| 2. Expected rating | fit one line through all wines `expected points = a + b*log10(price), where a is calculated with the least square formulas, and b is the number of extra points for a 10x more expensive wine. | Give a rating of what a wine at a specific price should have. |
 | 3. Value score | `value score = actual points - expected points` for every wine  | Positive value = good value, negative value = overpriced |
 | 4. Pearson  r | used to find correlation between `log10(price)` and `points | Show how strongly r and price rating go together |
 | 5. Grouping | mean value score and median value per country (min 200 wines) | Helps answer the research question |
 | 6. Uncertainty | repeats each calulation in 10 random subsamples , SD is error bars | Show how much a result would change. |
 
+### Why not use the points/price?
+The value of the ratings range from around 80 to 100, whereas the prices range up to a factor of 1000. Therefire this ratio would reward wines, rather than actually find the best value. 
 
-##Continue ratio, uncertainty, line fit 
-look for what is output in output section 
+### More on the uncertainty 
+The uncertainty was calculated by randomly splitting all of the wines into 10 subsamples. The same results were calculated in each subsample, most importantly the standard deviation, which was used as the uncertainty.
 
 
 ## Requirements and extensions 
@@ -91,6 +93,13 @@ look for what is output in output section
 ---
 
 ## Output 
+All of the numerical values are calculted and printed in the terminal. This includes, the number of wines, the fitted line, Pearson r and the results per country with their uncertainties accordingly. The three following figures are saved in the `figures` folder. 
+
+| File | Content |
+|---|---|
+| `fig1a_value_line_all_wines.png` |price vs points for all wines | 
+| `fig1b_value_line_averages.png |price vs points for 3000 random wines, and average price per range (for better visulization) |
+|  `fig2_value_by_country.png`| value score per country with uncertainties`| 
 
 
 ## Reproducibility
@@ -101,5 +110,13 @@ To reproduce the results, the user should download the original dataset from Kag
 
 No manual editing of the dataset is required. All relevant cleaning and filtering steps are performed by the R script.
 
-Because the dataset represents wines reviewed by *Wine Enthusiast* rather than a random sample of all wines available worldwide, the results should be interpreted as patterns within this dataset rather than as definitive rankings of countries, regions, or grape varieties.
+Because the dataset represents wines reviewed by *Wine Enthusiast* rather than a random sample of all wines available worldwide, the results should be interpreted as patterns within this dataset rather than as definitive rankings of countries.
 
+### Settings section 
+The settings section at the top of the code allows the modification of settings and the default used in the code. 
+| Setting | Meaning | 
+|---|---|
+| K = 10 |number of random subsamples | 
+| SEED = 42 |random seed so every run gives same results | 
+| MIN_WINES = 200 | minimum numer of wines for a country to be included| 
+| SHOW_FIGURES = True | Print figures |
