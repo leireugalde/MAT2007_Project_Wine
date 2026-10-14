@@ -6,7 +6,7 @@
 This project analyzes a large dataset of wine reviews to find out where you can get the best quality wine for your money. 
 
 The main research question is: 
-**What wine producing countries (and regions) offer the best balance between price and quality?**
+**What wine producing countries offer the best balance between price and quality?**
 
 Each wine is comapred to other wines at that same price. A wine that is rated higher than the expected for its specific price, is considered a wine with a good value. Finding the average of the value score for each country, shows which are the best places to look for good value wine.  
 
