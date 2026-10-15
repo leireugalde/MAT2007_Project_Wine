@@ -52,7 +52,7 @@ Read data --> clean --> log10(price) --> fit one line --> value score --> group 
 | 1. Log of price | uses `log10(price)`instead of normal price | Prices are very skewed by very expensive bottles. Making this a log scale makes the relationship linear. |
 | 2. Expected rating | fit one line through all wines `expected points = a + b*log10(price), where a is calculated with the least square formulas, and b is the number of extra points for a 10x more expensive wine. | Give a rating of what a wine at a specific price should have. |
 | 3. Value score | `value score = actual points - expected points` for every wine  | Positive value = good value, negative value = overpriced |
-| 4. Pearson  r | used to find correlation between `log10(price)` and `points | Show how strongly r and price rating go together |
+| 4. Pearson  r | used to find correlation between `log10(price)` and `points` | Show how strongly r and price rating go together |
 | 5. Grouping | mean value score and median value per country (min 200 wines) | Helps answer the research question |
 | 6. Uncertainty | repeats each calulation in 10 random subsamples , SD is error bars | Show how much a result would change. |
 
